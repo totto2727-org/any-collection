@@ -9,7 +9,6 @@ permissions:
 
 jobs:
   publish:
-    environment: mooncakes-production
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
