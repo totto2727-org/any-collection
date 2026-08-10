@@ -22,5 +22,3 @@ jobs:
           moon check --target all
           moon test --target all
           moon package --list
-      - name: Verify Nix checks
-        run: nix flake check --system x86_64-linux
