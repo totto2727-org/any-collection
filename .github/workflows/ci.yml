@@ -17,6 +17,7 @@ jobs:
       - name: Verify MoonBit module
         run: |
           eval "$(nix print-dev-env "$GITHUB_WORKSPACE#default")"
+          moon update
           moon info
           moon check --target all
           moon test --target all
