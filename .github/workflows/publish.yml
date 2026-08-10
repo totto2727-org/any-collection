@@ -1,20 +1,14 @@
 name: Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      confirm:
-        description: Confirm that this publishes totto2727/any-collection.
-        required: true
-        type: boolean
-        default: false
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
   publish:
-    if: inputs.confirm
     environment: mooncakes-production
     runs-on: ubuntu-latest
     steps:
