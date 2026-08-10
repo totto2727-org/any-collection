@@ -1,6 +1,6 @@
 name = "totto2727/any-collection"
 
-version = "0.2.0"
+version = "0.2.1"
 
 import {
   "Yoorkin/any@0.2.1",
@@ -8,7 +8,7 @@ import {
 
 readme = "README.mbt.md"
 
-repository = "https://github.com/totto2727-org/monorepo"
+repository = "https://github.com/totto2727-org/any-collection"
 
 license = "MIT"
 
