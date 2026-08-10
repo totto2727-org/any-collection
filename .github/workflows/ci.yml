@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14
+            system: aarch64-darwin
+          - runner: ubuntu-latest
+            system: x86_64-linux
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: totto2727-org/monorepo/.github/actions/setup-nix@main
+      - name: Verify MoonBit module
+        run: |
+          eval "$(nix print-dev-env "$GITHUB_WORKSPACE#default")"
+          moon info
+          moon check --target all
+          moon test --target all
+          moon package --list
+      - name: Verify Nix checks
+        run: nix flake check --system ${{ matrix.system }}
