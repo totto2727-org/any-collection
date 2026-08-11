@@ -14,12 +14,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: totto2727-org/monorepo/.github/actions/setup-nix@main
-      - name: Verify MoonBit module
-        run: |
-          eval "$(nix print-dev-env "$GITHUB_WORKSPACE#default")"
-          moon update
-          moon info
-          moon check
-          moon build
-          moon test
-          moon package --list
+      - uses: totto2727-org/monorepo/.github/actions/setup-moonbit@main
+      - uses: totto2727-org/monorepo/.github/actions/check-moonbit@main
