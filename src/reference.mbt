@@ -15,6 +15,9 @@ pub struct AnyRef[K, T] {
 /// Callers should define one shared reference per key and value type. Creating
 /// references with the same key but different value types makes mismatched
 /// reads raise the conversion error unless a fallback getter is used.
+/// `T` must implement `Yoorkin/any.Anyable`; MoonBit core types already have
+/// implementations. Custom values must extend `Yoorkin/any.Payload` and
+/// implement `Anyable`.
 pub fn[K, T : @any.Anyable] AnyRef::AnyRef(key : K) -> AnyRef[K, T] {
   {
     key,
@@ -24,7 +27,8 @@ pub fn[K, T : @any.Anyable] AnyRef::AnyRef(key : K) -> AnyRef[K, T] {
 }
 
 ///|
-/// Creates a key-value entry for collection initialization.
+/// Creates a key-value entry for collection initialization without exposing
+/// the `Yoorkin/any` encoding step to callers.
 pub fn[K, T] AnyRef::entry(self : AnyRef[K, T], value : T) -> (K, @any.Any) {
   (self.key, (self.encode)(value))
 }

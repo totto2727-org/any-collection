@@ -1,11 +1,19 @@
 ///|
 /// A mutable map of dynamically typed values accessed through `AnyRef`.
+///
+/// The public `map` field exposes the underlying `Map[K, @any.Any]` for
+/// operations that do not need typed conversion, including membership,
+/// removal, length, emptiness, iteration, merging, and direct `Any` writes.
 pub struct AnyMutableMap[K] {
   map : Map[K, @any.Any]
 }
 
 ///|
 /// Creates a mutable any map from key-value pairs.
+///
+/// The entries and optional `capacity` have the same meaning as the
+/// underlying `Map` constructor. Pass `[]` for an empty map. Entries may be
+/// produced with `AnyRef::entry` or supplied as raw `@any.Any` pairs.
 pub fn[K : Hash + Eq] AnyMutableMap::AnyMutableMap(
   entries : ArrayView[(K, @any.Any)],
   capacity? : Int,

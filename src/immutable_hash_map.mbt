@@ -1,12 +1,20 @@
 ///|
 /// An immutable hash map of dynamically typed values accessed through
 /// `AnyRef`.
+///
+/// The public `map` field exposes the underlying persistent hash map for
+/// operations that do not need typed conversion, including membership,
+/// removal, length, emptiness, iteration, merging, and direct `Any` values.
 pub struct AnyImmutableHashMap[K] {
   map : @immut.HashMap[K, @any.Any]
 }
 
 ///|
 /// Creates an immutable any hash map from key-value pairs.
+///
+/// The entries have the same meaning as the underlying `@immut.HashMap`
+/// constructor. Pass `[]` for an empty map. Entries may be produced with
+/// `AnyRef::entry` or supplied as raw `@any.Any` pairs.
 pub fn[K : Hash + Eq] AnyImmutableHashMap::AnyImmutableHashMap(
   entries : ArrayView[(K, @any.Any)],
 ) -> AnyImmutableHashMap[K] {
@@ -15,6 +23,7 @@ pub fn[K : Hash + Eq] AnyImmutableHashMap::AnyImmutableHashMap(
 
 ///|
 /// Returns a map associating `value` with `reference` without changing this map.
+/// The same `AnyRef` instance can be used with mutable and immutable maps.
 pub fn[K : Hash + Eq, T] AnyImmutableHashMap::added(
   self : AnyImmutableHashMap[K],
   reference : AnyRef[K, T],
