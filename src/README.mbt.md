@@ -10,10 +10,10 @@ test {
   let request_id : AnyRef[String, String] = AnyRef::AnyRef("request_id")
   let retry_count : AnyRef[String, Int] = AnyRef::AnyRef("retry_count")
 
-  let mutable = AnyMutableMap::AnyMutableMap([
-    request_id.entry("request-1"),
-    retry_count.entry(2),
-  ], capacity=8)
+  let mutable = AnyMutableMap::AnyMutableMap(
+    [request_id.entry("request-1"), retry_count.entry(2)],
+    capacity=8,
+  )
   debug_inspect(mutable.get(request_id), content="Some(\"request-1\")")
   mutable.set(retry_count, 3)
   inspect(mutable.get_or(retry_count, 0), content="3")
