@@ -17,7 +17,7 @@ flake.nix                    Reproducible MoonBit development shell
 
 - Run commands from the repository root.
 - Enter the pinned toolchain with `nix develop` before running MoonBit commands.
-- Keep `README.mbt.md` canonical and preserve the relative `README.md -> README.mbt.md` symlink.
+- Keep `src/README.mbt.md` canonical; preserve the relative chain `README.md -> README.mbt.md -> src/README.mbt.md`.
 - Regenerate interfaces after public API changes and inspect the resulting `.mbti` diff.
 - Do not add a `CLAUDE.md` file; `AGENTS.md` is the requested canonical agent guidance.
 
@@ -27,8 +27,8 @@ flake.nix                    Reproducible MoonBit development shell
 - `moon info` — Regenerate package interface information after public API changes.
 - `moon check` — Type-check the library and example packages.
 - `moon test` — Run the package tests.
-- `moon check README.mbt.md` — Ask MoonBit to check the canonical README; with this module's `source = "./src"` layout, package-level checks are the effective validation path.
-- `moon test README.mbt.md` — Run standalone README tests when the MoonBit toolchain accepts the document as a package input; otherwise use `moon test` for this source-root package layout.
+- `cd src && moon check README.mbt.md` — Check the package-local canonical README and its executable MoonBit example.
+- `cd src && moon test README.mbt.md` — Run the package-local README's executable MoonBit example.
 - `moon package --list` — Confirm the packages included in publication.
 - `nix flake check --all-systems --no-build` — Validate the Nix flake without building.
 
@@ -61,6 +61,6 @@ flake.nix                    Reproducible MoonBit development shell
 ## Package-specific rules
 
 - Keep custom stored values compatible with `Yoorkin/any.Anyable`; custom types extend `Yoorkin/any.Payload` and implement `Anyable` as shown in `src/examples/basic/main.mbt`.
-- Keep the `moon.mod` `readme = "README.mbt.md"` setting aligned with the canonical literate README.
+- Keep the `moon.mod` `readme = "README.mbt.md"` setting aligned with the root README symlink chain.
 
 _This AGENTS.md was generated from the [share-artifact skill](https://raw.githubusercontent.com/totto2727-org/agent/refs/heads/main/plugins/totto2727-coding/skills/share-artifact/SKILL.md) and [AGENTS template](https://raw.githubusercontent.com/totto2727-org/agent/refs/heads/main/plugins/totto2727-coding/skills/share-artifact/agents/template.md)._
