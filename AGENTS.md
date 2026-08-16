@@ -3,7 +3,11 @@
 ## Repository structure
 
 ```text
+README.mbt.md                Canonical end-user module overview
+README.md                    Relative symlink to README.mbt.md
+LICENSE                      Module license
 src/                         AnyRef and mutable/immutable map implementations
+src/README.mbt.md            Package-specific end-user guide
 src/*_test.mbt               Package tests for public behavior
 src/examples/basic/          Executable custom-payload example
 moon.mod                     MoonBit module metadata and Mooncakes package settings
@@ -17,19 +21,24 @@ flake.nix                    Reproducible MoonBit development shell
 
 - Run commands from the repository root.
 - Enter the pinned toolchain with `nix develop` before running MoonBit commands.
-- Keep `src/README.mbt.md` canonical; preserve the relative chain `README.md -> README.mbt.md -> src/README.mbt.md`.
+- Keep root `README.mbt.md` canonical for the module overview and preserve the relative `README.md -> README.mbt.md` symlink.
+- Keep `src/README.mbt.md` as the detailed package guide; it supplements the root README and links to root `AGENTS.md` and `LICENSE`.
 - Regenerate interfaces after public API changes and inspect the resulting `.mbti` diff.
-- Do not add a `CLAUDE.md` file; `AGENTS.md` is the requested canonical agent guidance.
+- Do not add a package-level `AGENTS.md` unless the source package gains rules that are genuinely unique to it.
 
 ### Standard tasks
 
 - `nix develop` — Enter the pinned MoonBit development environment.
 - `moon info` — Regenerate package interface information after public API changes.
+- `moon fmt` — Format MoonBit sources and literate Markdown blocks.
 - `moon check` — Type-check the library and example packages.
 - `moon test` — Run the package tests.
-- `cd src && moon check README.mbt.md` — Check the package-local canonical README and its executable MoonBit example.
-- `cd src && moon test README.mbt.md` — Run the package-local README's executable MoonBit example.
+- `moon build` — Build the library and example packages.
+- `moon check README.mbt.md` — Check the canonical module README and its executable MoonBit example.
+- `cd src && moon check README.mbt.md` — Check the package-specific README and its executable MoonBit example.
+- `cd src && moon test README.mbt.md` — Run the package-specific README's executable MoonBit example.
 - `moon package --list` — Confirm the packages included in publication.
+- `moon package` — Build the publication archive and inspect its root/module and source/package paths.
 - `nix flake check --all-systems --no-build` — Validate the Nix flake without building.
 
 ## Architecture
@@ -49,6 +58,8 @@ flake.nix                    Reproducible MoonBit development shell
 
 - Mooncakes is the canonical maintained API index; keep README API content to the direct registry link.
 - Public behavior belongs in `///` documentation and executable package or README examples.
+- `moon.mod` owns module metadata, the root `README.mbt.md` path, the root `LICENSE`, and the `source = "./src"` package boundary.
+- The publication archive keeps root module artifacts at its top level and implementation/package artifacts under `src/`; do not duplicate root guidance or the license as package aliases.
 - The publishing workflow runs only on `main` and uses the repository's shared MoonBit publication action.
 
 ## Development tools
@@ -61,6 +72,6 @@ flake.nix                    Reproducible MoonBit development shell
 ## Package-specific rules
 
 - Keep custom stored values compatible with `Yoorkin/any.Anyable`; custom types extend `Yoorkin/any.Payload` and implement `Anyable` as shown in `src/examples/basic/main.mbt`.
-- Keep the `moon.mod` `readme = "README.mbt.md"` setting aligned with the root README symlink chain.
+- Keep the `moon.mod` `readme = "README.mbt.md"` setting aligned with the root canonical module README.
 
 _This AGENTS.md was generated from the [share-artifact skill](https://raw.githubusercontent.com/totto2727-org/agent/refs/heads/main/plugins/totto2727-coding/skills/share-artifact/SKILL.md) and [AGENTS template](https://raw.githubusercontent.com/totto2727-org/agent/refs/heads/main/plugins/totto2727-coding/skills/share-artifact/agents/template.md)._
