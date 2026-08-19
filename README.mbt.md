@@ -6,7 +6,7 @@ This document is canonical `README.mbt.md`; maintain `README.md` as the relative
 
 ## Usage
 
-```mbt check
+```moonbit
 ///|
 test {
   let request_id : @any_collection.AnyRef[String, String] =
@@ -30,10 +30,20 @@ test {
 
 ## Setup
 
-1. Add the module to a MoonBit project.
+1. Add the required modules to a MoonBit project.
 
 ```bash
+moon add Yoorkin/any@0.2.1
 moon add totto2727/any-collection@0.2.1
+```
+
+2. Import the package from the consumer package's `moon.pkg`.
+
+```moonbit
+import {
+  "Yoorkin/any",
+  "totto2727/any-collection" @any_collection,
+}
 ```
 
 ## API
