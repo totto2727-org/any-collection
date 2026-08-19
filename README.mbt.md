@@ -2,8 +2,6 @@
 
 `totto2727/any-collection` is a MoonBit module for mutable and persistent immutable maps whose values are stored as `Yoorkin/any.Any` and read through reusable typed references.
 
-This document is canonical `README.mbt.md`; maintain `README.md` as the relative symlink `README.md -> README.mbt.md`.
-
 ## Usage
 
 ```moonbit

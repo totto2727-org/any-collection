@@ -2,8 +2,6 @@
 
 `totto2727/any-collection` provides mutable and persistent immutable maps whose values are stored as `Yoorkin/any.Any` and retrieved through reusable typed references.
 
-This document is canonical `src/README.mbt.md`; the module overview remains at [the repository README](../README.mbt.md).
-
 ## Usage
 
 ```mbt check
