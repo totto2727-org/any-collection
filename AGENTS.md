@@ -7,7 +7,6 @@ README.mbt.md                Canonical end-user module overview
 README.md                    Relative symlink to README.mbt.md
 LICENSE                      Module license
 src/                         AnyRef and mutable/immutable map implementations
-src/README.mbt.md            Package-specific end-user guide
 src/*_test.mbt               Package tests for public behavior
 src/examples/basic/          Executable custom-payload example
 moon.mod                     MoonBit module metadata and Mooncakes package settings
@@ -22,7 +21,6 @@ flake.nix                    Reproducible MoonBit development shell
 - Run commands from the repository root.
 - Enter the pinned toolchain with `nix develop` before running MoonBit commands.
 - Keep root `README.mbt.md` canonical for the module overview and preserve the relative `README.md -> README.mbt.md` symlink.
-- Keep `src/README.mbt.md` as the detailed package guide; it supplements the root README and links to root `AGENTS.md` and `LICENSE`.
 - Regenerate interfaces after public API changes and inspect the resulting `.mbti` diff.
 - Do not add a package-level `AGENTS.md` unless the source package gains rules that are genuinely unique to it.
 
@@ -35,8 +33,6 @@ flake.nix                    Reproducible MoonBit development shell
 - `moon test` — Run the package tests.
 - `moon build` — Build the library and example packages.
 - `moon check README.mbt.md` — Check the canonical module README and its executable MoonBit example.
-- `cd src && moon check README.mbt.md` — Check the package-specific README and its executable MoonBit example.
-- `cd src && moon test README.mbt.md` — Run the package-specific README's executable MoonBit example.
 - `moon package --list` — Confirm the packages included in publication.
 - `moon package` — Build the publication archive and inspect its root/module and source/package paths.
 - `nix flake check --all-systems --no-build` — Validate the Nix flake without building.
