@@ -19,7 +19,7 @@ impl @any.Anyable for RequestContext with fn iso() {
     ),
     box: context => RequestContext(context),
     unbox: payload => {
-      guard payload is RequestContext(context)
+      guard! payload is RequestContext(context)
       context
     },
   }
