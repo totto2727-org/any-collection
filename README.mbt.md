@@ -7,10 +7,12 @@
 ```mbt check
 ///|
 test "update a retry context without changing its baseline snapshot" {
-  let request_id : @any_collection.AnyRef[String, String] =
-    @any_collection.AnyRef::AnyRef("request_id")
-  let retry_count : @any_collection.AnyRef[String, Int] =
-    @any_collection.AnyRef::AnyRef("retry_count")
+  let request_id : @any_collection.AnyRef[String, String] = @any_collection.AnyRef::AnyRef(
+    "request_id",
+  )
+  let retry_count : @any_collection.AnyRef[String, Int] = @any_collection.AnyRef::AnyRef(
+    "retry_count",
+  )
   let live_context = @any_collection.AnyMutableMap::AnyMutableMap([])
   live_context.set(request_id, "req-42")
   live_context.set(retry_count, 0)
@@ -44,9 +46,10 @@ test "update a retry context without changing its baseline snapshot" {
 
 ## Setup
 
-1. Add the module to a MoonBit project.
+1. Add the required modules to a MoonBit project.
 
 ```bash
+moon add Yoorkin/any@0.2.1
 moon add totto2727/any-collection@0.2.2
 ```
 
@@ -54,6 +57,7 @@ moon add totto2727/any-collection@0.2.2
 
 ```moonbit
 import {
+  "Yoorkin/any",
   "totto2727/any-collection" @any_collection,
 }
 ```
