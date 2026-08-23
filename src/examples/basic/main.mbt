@@ -19,7 +19,9 @@ impl @any.Anyable for RequestContext with fn iso() {
     ),
     box: context => RequestContext(context),
     unbox: payload => {
-      guard payload is RequestContext(context)
+      // Iso::unbox has no recoverable error channel, so a payload that violates
+      // the cast contract must fail fast.
+      guard! payload is RequestContext(context)
       context
     },
   }

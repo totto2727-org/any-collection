@@ -33,7 +33,7 @@ test {
 1. Add the module to a MoonBit project.
 
 ```bash
-moon add totto2727/any-collection@0.2.1
+moon add totto2727/any-collection@0.2.2
 ```
 
 ## API
