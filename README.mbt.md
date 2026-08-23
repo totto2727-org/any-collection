@@ -2,19 +2,35 @@
 
 `totto2727/any-collection` is a MoonBit module for mutable and persistent immutable maps whose values are stored as `Yoorkin/any.Any` and read through reusable typed references.
 
-This document is canonical `README.mbt.md`; maintain `README.md` as the relative symlink `README.md -> README.mbt.md`.
-
 ## Usage
 
 ```mbt check
 ///|
-test {
-  let request_id : @any_collection.AnyRef[String, String] =
-    @any_collection.AnyRef::AnyRef("request_id")
-  let values = @any_collection.AnyMutableMap::AnyMutableMap([
-    request_id.entry("request-1"),
+test "update a retry context without changing its baseline snapshot" {
+  let request_id : @any_collection.AnyRef[String, String] = @any_collection.AnyRef::AnyRef(
+    "request_id",
+  )
+  let retry_count : @any_collection.AnyRef[String, Int] = @any_collection.AnyRef::AnyRef(
+    "retry_count",
+  )
+  let live_context = @any_collection.AnyMutableMap::AnyMutableMap([])
+  live_context.set(request_id, "req-42")
+  live_context.set(retry_count, 0)
+  live_context.set(retry_count, live_context.get_or(retry_count, 0) + 1)
+
+  let baseline = @any_collection.AnyImmutableHashMap::AnyImmutableHashMap([
+    request_id.entry("req-42"),
+    retry_count.entry(0),
   ])
-  debug_inspect(values.get(request_id), content="Some(\"request-1\")")
+  let retry_snapshot = baseline.added(
+    retry_count,
+    live_context.get_or(retry_count, 0),
+  )
+
+  inspect(live_context.get_or(request_id, ""), content="req-42")
+  inspect(live_context.get_or(retry_count, 0), content="1")
+  inspect(baseline.get_or(retry_count, 0), content="0")
+  inspect(retry_snapshot.get_or(retry_count, 0), content="1")
 }
 ```
 
@@ -30,10 +46,20 @@ test {
 
 ## Setup
 
-1. Add the module to a MoonBit project.
+1. Add the required modules to a MoonBit project.
 
 ```bash
+moon add Yoorkin/any@0.2.1
 moon add totto2727/any-collection@0.2.2
+```
+
+2. Import the package from the consumer package's `moon.pkg`.
+
+```moonbit
+import {
+  "Yoorkin/any",
+  "totto2727/any-collection" @any_collection,
+}
 ```
 
 ## API
