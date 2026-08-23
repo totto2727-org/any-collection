@@ -4,7 +4,7 @@
 
 ## Usage
 
-```moonbit
+```mbt check
 ///|
 test "update a retry context without changing its baseline snapshot" {
   let request_id : @any_collection.AnyRef[String, String] =
@@ -44,18 +44,16 @@ test "update a retry context without changing its baseline snapshot" {
 
 ## Setup
 
-1. Add the required modules to a MoonBit project.
+1. Add the module to a MoonBit project.
 
 ```bash
-moon add Yoorkin/any@0.2.1
-moon add totto2727/any-collection@0.2.1
+moon add totto2727/any-collection@0.2.2
 ```
 
 2. Import the package from the consumer package's `moon.pkg`.
 
 ```moonbit
 import {
-  "Yoorkin/any",
   "totto2727/any-collection" @any_collection,
 }
 ```
