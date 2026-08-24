@@ -1,4 +1,0 @@
-import {
-  "Yoorkin/any",
-  "totto2727/any-collection" @any_collection,
-} for "test"
