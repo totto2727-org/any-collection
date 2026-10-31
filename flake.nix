@@ -30,7 +30,7 @@
         let
           pkgs = mkPkgs system;
         in
-        {
+        rec {
           default = pkgs.mkShell {
             packages = [ pkgs.moonbit-bin.moonbit.latest ];
             shellHook = ''
@@ -38,6 +38,7 @@
               vp config
             '';
           };
+          ci = default.overrideAttrs (_: { shellHook = ""; });
         }
       );
     };
