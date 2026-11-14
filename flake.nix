@@ -32,7 +32,7 @@
         in
         rec {
           default = pkgs.mkShell {
-            packages = [ pkgs.moonbit-bin.latest ];
+            packages = [ pkgs.moonbit-bin."v0.10.9+6e6c44045+fc2a4ee" ];
             shellHook = ''
               # Enable Git Hook
               vp config
