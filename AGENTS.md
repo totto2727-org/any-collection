@@ -60,9 +60,9 @@ flake.nix                    Reproducible MoonBit development shell
 ## Development tools
 
 - **MoonBit**: Builds, checks, tests, documents, and packages the library.
-- **Nix flakes**: Pin the MoonBit toolchain for local and CI-compatible validation.
+- **Nix flakes**: Pin the MoonBit SDK for local development and validation.
 - **Mooncakes**: Publishes the versioned package and hosts the generated API reference.
-- **GitHub Actions**: Runs CI and publication workflows.
+- **GitHub Actions**: Install the SDK through the shared MoonBit setup action, then run checks or publication.
 
 ## Package-specific rules
 
