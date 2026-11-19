@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 struct RequestContext {
   request_id : String
-  retry_count : Int
-} derive(Debug, Eq)
+  retry_count : Int32
+}
 
 ///|
 extenum @any.Payload += {
@@ -32,7 +33,7 @@ fn main {
   let request_id : @any_collection.AnyRef[String, String] = @any_collection.AnyRef::AnyRef(
     "request_id",
   )
-  let retry_count : @any_collection.AnyRef[String, Int] = @any_collection.AnyRef::AnyRef(
+  let retry_count : @any_collection.AnyRef[String, Int32] = @any_collection.AnyRef::AnyRef(
     "retry_count",
   )
   let request_context : @any_collection.AnyRef[String, RequestContext] = @any_collection.AnyRef::AnyRef(
