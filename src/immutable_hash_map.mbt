@@ -18,7 +18,7 @@ pub struct AnyImmutableHashMap[K] {
 pub fn[K : Hash + Eq] AnyImmutableHashMap::AnyImmutableHashMap(
   entries : ArrayView[(K, @any.Any)],
 ) -> AnyImmutableHashMap[K] {
-  { map: @immut.HashMap::HashMap(entries) }
+  { map: @immut.HashMap::HashMap(entries), }
 }
 
 ///|
@@ -29,7 +29,7 @@ pub fn[K : Hash + Eq, T] AnyImmutableHashMap::added(
   reference : AnyRef[K, T],
   value : T,
 ) -> AnyImmutableHashMap[K] {
-  { map: self.map.add(reference.key, (reference.encode)(value)) }
+  { map: self.map.add(reference.key, (reference.encode)(value)), }
 }
 
 ///|

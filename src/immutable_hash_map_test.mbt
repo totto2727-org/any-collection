@@ -1,7 +1,9 @@
 ///|
 test "AnyImmutableHashMap added - preserves the original map" {
-  let request_id : AnyRef[String, String] = AnyRef::AnyRef("request_id")
-  let original = AnyImmutableHashMap::AnyImmutableHashMap([
+  let request_id : @any-collection.AnyRef[String, String] = @any-collection.AnyRef::AnyRef(
+    "request_id",
+  )
+  let original = @any-collection.AnyImmutableHashMap::AnyImmutableHashMap([
     request_id.entry("request-1"),
   ])
   let updated = original.added(request_id, "request-2")
@@ -13,11 +15,13 @@ test "AnyImmutableHashMap added - preserves the original map" {
 
 ///|
 test "AnyImmutableHashMap map - exposes persistent operations" {
-  let request_id : AnyRef[String, String] = AnyRef::AnyRef("request_id")
-  let populated = AnyImmutableHashMap::AnyImmutableHashMap([
+  let request_id : @any-collection.AnyRef[String, String] = @any-collection.AnyRef::AnyRef(
+    "request_id",
+  )
+  let populated = @any-collection.AnyImmutableHashMap::AnyImmutableHashMap([
     request_id.entry("request-1"),
   ])
-  let removed = AnyImmutableHashMap::AnyImmutableHashMap(
+  let removed = @any-collection.AnyImmutableHashMap::AnyImmutableHashMap(
     populated.map.remove(request_id.key).to_array(),
   )
   debug_inspect(populated.get(request_id), content="Some(\"request-1\")")
@@ -27,10 +31,18 @@ test "AnyImmutableHashMap map - exposes persistent operations" {
 
 ///|
 test "AnyImmutableHashMap get variants - handle conversion errors explicitly" {
-  let count : AnyRef[Int, Int] = AnyRef::AnyRef(1)
-  let text : AnyRef[Int, String] = AnyRef::AnyRef(1)
-  let missing : AnyRef[Int, String] = AnyRef::AnyRef(2)
-  let context = AnyImmutableHashMap::AnyImmutableHashMap([count.entry(2)])
+  let count : @any-collection.AnyRef[Int32, Int32] = @any-collection.AnyRef::AnyRef(
+    1,
+  )
+  let text : @any-collection.AnyRef[Int32, String] = @any-collection.AnyRef::AnyRef(
+    1,
+  )
+  let missing : @any-collection.AnyRef[Int32, String] = @any-collection.AnyRef::AnyRef(
+    2,
+  )
+  let context = @any-collection.AnyImmutableHashMap::AnyImmutableHashMap([
+    count.entry(2),
+  ])
   let mismatch_raised = try {
     context.get(text) |> ignore
     false

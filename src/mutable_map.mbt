@@ -16,9 +16,9 @@ pub struct AnyMutableMap[K] {
 /// produced with `AnyRef::entry` or supplied as raw `@any.Any` pairs.
 pub fn[K : Hash + Eq] AnyMutableMap::AnyMutableMap(
   entries : ArrayView[(K, @any.Any)],
-  capacity? : Int,
+  capacity? : Int32,
 ) -> AnyMutableMap[K] {
-  { map: Map(entries, capacity?) }
+  { map: Map(entries, capacity?), }
 }
 
 ///|
